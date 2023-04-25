@@ -129,3 +129,9 @@ def nuevoMensaje(request):
     else:
         form=MensajeForm()
         return render(request, "AppUsuarios/nuevoMensaje.html", {"form": form,"avatar":obtenerAvatar(request)})
+    
+@login_required
+def mensajes(request):
+    mensajes=Mensaje.objects.all
+
+    return render (request, 'AppUsuarios/mensajes.html', {'mensajes':mensajes})

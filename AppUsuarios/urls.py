@@ -11,6 +11,7 @@ urlpatterns = [
     path('editarPerfil/', editarPerfil, name='editarPerfil'),    
     path('agregarAvatar/', agregarAvatar, name='agregarAvatar'),
     path('nuevoMensaje/', nuevoMensaje, name='nuevoMensaje'),
+    path('mensajes/', mensajes, name='mensajes')
     
     
 ]

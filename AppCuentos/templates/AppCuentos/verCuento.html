@@ -1,0 +1,27 @@
+{% extends "AppUsuarios/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+
+{{ titulo }}
+
+{% endblock %} 
+
+{% block cuerpo %}
+
+<!-- Featured blog post-->
+<div class="card mb-4">
+    <a href="#!"><img class="card-img-top" src="{{ foto }}" alt="foto" /></a>
+    <div class="card-body">
+        <div class="small text-muted">{{ fecha }}</div>
+        <p class="card-text">{{ categoria }}</p>
+        <h2 class="card-title">{{ titulo }}</h2>
+        <p class="card-text">{{ subtitulo }}</p>
+        <p class="card-text">{{ cuerpo }}</p>
+        <p class="card-text">{{ autor }}</p>
+        <a class="btn btn-primary" href="#!">Read more →</a>
+    </div>
+</div>
+
+{% endblock %}

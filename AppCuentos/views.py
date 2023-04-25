@@ -6,8 +6,17 @@ from AppUsuarios.views import *
 
 # Create your views here.
 
-def obtenerFoto(request):
-    pass
+def verCuento(request, id):
+    cuento=Cuento.objects.get(id=id)
+    categoria=cuento.categoria
+    titulo=cuento.titulo
+    subtitulo=cuento.subtitulo
+    cuerpo=cuento.cuerpo
+    autor=cuento.autor
+    fecha=cuento.fecha
+    imagen=Foto.objects.get(cuento_id=id)
+    foto=imagen.foto.url
+    return render(request, {'categoria':categoria,'titulo':titulo,'subtitulo':subtitulo,'cuerpo':cuerpo,'autor':autor,'fecha':fecha,'foto':foto})
 
 def nuevaFoto(request):
     if request.method=="POST":

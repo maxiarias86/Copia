@@ -17,6 +17,7 @@
             {% for cuento in cuentos %}
             
             {{ cuento.titulo }}
+            <a class="btn btn-danger" href="{% url 'verCuento'  cuento.id  %}">Ver Cuento </a>
 
             {% endfor %}
 

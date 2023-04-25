@@ -1,16 +1,38 @@
 from django.shortcuts import render
 from .models import *
 from .forms import *
+from AppUsuarios.models import *
+from AppUsuarios.views import *
 
 # Create your views here.
+
+def obtenerFoto(request):
+    pass
+
+def nuevaFoto(request):
+    if request.method=="POST":
+        form=FotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            info=form.cleaned_data
+            foto=Foto()
+            foto.cuento=info['cuento']
+            foto.foto=request.FILES["foto"]
+            
+            foto.save()
+    
+            return render(request, "AppCuentos/verCuento.html", {"mensaje":f"Cuento agregado correctamente", "foto":obtenerFoto(foto)})
+        else:
+            return render(request, "AppCuentos/verCuento.html", {"mensaje":"Error al agregar foto"})
+    else:
+        form=FotoForm()
+        return render(request, "AppUsuarios/agregarFoto.html", {"form": form, "avatar":obtenerAvatar(request)})
 
 def nuevoCuento(request):
     
     if request.method =='POST':
         form=CuentoForm(request.POST)
-        form2=FotoForm(request.POST, request.FILES)
 
-        if form.is_valid() and form2.is_valid():
+        if form.is_valid():
             info=form.cleaned_data
             
             cuento=Cuento()
@@ -22,19 +44,17 @@ def nuevoCuento(request):
             cuento.cuerpo=info['cuerpo']
             
             cuento.save()
-
-            info2=form2.cleaned_data
-            foto=Foto()
-            foto.foto=request.FILES["foto"]
-            foto.titulo= info2['titulo']
-
-            foto.save()
             
         else:
             return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":'Error al agregar el cuento'})
         
-        return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":'Cuento cargado con éxito'})
+        cuentos=Cuento.objects.all()
+        return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":'Cuento cargado con éxito','cuentos':cuentos})
     else:
         form=CuentoForm()
-        form2=FotoForm()
-        return render(request, "AppCuentos/nuevoCuento.html", {"form": form,'form2':form2})   
+        return render(request, "AppCuentos/nuevoCuento.html", {"form": form})   
+
+def inicioCuentos(request):
+    cuentos=Cuento.objects.all()
+    
+    return render(request,"AppCuentos/inicioCuentos.html", {'cuentos':cuentos})

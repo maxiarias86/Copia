@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from AppUsuarios.views import *
+from AppCuentos.views import *
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -23,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", inicioUsuarios, name="inicioUsuarios"),
     path('AppUsuarios/', include('AppUsuarios.urls')),
+    path('AppCuentos/', include('AppCuentos.urls')),
 
 ]
 

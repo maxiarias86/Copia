@@ -1,0 +1,26 @@
+{% extends "AppUsuarios/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+                   
+<h1 class="fw-bolder">Cuentos</h1>
+                    
+{% endblock %}
+
+{% block cuerpo %}
+
+<body>
+    <p> {{ mensaje }} </p>
+        <table>
+        
+            {% for cuento in cuentos %}
+            
+            {{ cuento.titulo }}
+
+            {% endfor %}
+
+        </table>
+    
+</body>
+{% endblock %}

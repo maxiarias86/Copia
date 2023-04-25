@@ -1,0 +1,23 @@
+{% extends "AppUsuarios/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+                   
+<h1 class="fw-bolder">Nuevo Cuento</h1>
+                    
+{% endblock %}
+
+{% block cuerpo %}
+
+<body>
+    <h1>{{ mensaje }}</h1>
+    
+    <form action="{% url 'nuevoCuento' %}" method="POST">
+        {% csrf_token %}
+            {{ form.as_p }}
+        <button type="submit">Agregar cuento</button>
+    </form>
+    
+</body>
+{% endblock %}

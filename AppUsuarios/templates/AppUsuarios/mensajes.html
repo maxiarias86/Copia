@@ -17,7 +17,7 @@
     <h2>{{ mensaje.titulo }}</h2>
     <h3>{{ mensaje.contenido }}</h3>
     <h3>{{ mensaje.remitente }}</h3>
-    <a class="btn btn-danger" href="{% url 'responderMensaje' %}">Responder</a>
+    <a class="btn btn-danger" href="{% url 'nuevoMensaje' %}">Responder</a>
     {% endfor %}
 </body>
 {% endblock %}

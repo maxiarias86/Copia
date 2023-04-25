@@ -10,15 +10,11 @@ def inicioUsuarios(request):
     return render (request, 'AppUsuarios/inicioUsuarios.html',{"avatar":obtenerAvatar(request)})
 
 @login_required
-def crearMensaje(request):
-    pass
-
-@login_required
 def listarMensajes(request):
     pass
 
 @login_required
-def responder(request):
+def responderMensaje(request):
     pass
 
 @login_required
@@ -132,6 +128,10 @@ def nuevoMensaje(request):
     
 @login_required
 def mensajes(request):
-    mensajes=Mensaje.objects.all
+    mensajes=Mensaje.objects.all()
 
     return render (request, 'AppUsuarios/mensajes.html', {'mensajes':mensajes})
+
+@login_required
+def verPerfil(request):
+    pass

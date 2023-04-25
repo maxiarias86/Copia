@@ -1,0 +1,28 @@
+{% extends "AppUsuarios/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+                   
+<h1 class="fw-bolder">Agregar Avatar</h1>
+                    
+{% endblock %}
+
+{% block cuerpo %}
+<body>
+    <p> Agregar avatar a {{ usuario.username }} </p>
+    <form action="{% url 'agregarAvatar' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+        <table>
+        
+            {{ form.as_table }}
+        
+        </table>
+        
+        <input type="submit" value="Agregar Avatar">
+        
+        
+    </form>
+    
+</body>
+{% endblock %}

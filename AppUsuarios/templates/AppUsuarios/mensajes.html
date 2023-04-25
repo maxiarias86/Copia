@@ -1,0 +1,23 @@
+{% extends "AppUsuarios/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+                   
+<h1 class="fw-bolder">Mensajería</h1>
+                    
+{% endblock %}
+
+{% block cuerpo %}
+
+<body>
+    {% for mensaje in mensajes %}
+    
+    <h4>{{ mensaje.fecha }}</h4>
+    <h2>{{ mensaje.titulo }}</h2>
+    <h3>{{ mensaje.contenido }}</h3>
+    <h3>{{ mensaje.remitente }}</h3>
+    <a class="btn btn-danger" href="{% url 'responderMensaje' %}">Responder</a>
+    {% endfor %}
+</body>
+{% endblock %}

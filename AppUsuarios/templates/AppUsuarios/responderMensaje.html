@@ -1,0 +1,23 @@
+{% extends "AppUsuarios/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+                   
+<h1 class="fw-bolder">Responder</h1>
+                    
+{% endblock %}
+
+{% block cuerpo %}
+
+<body>
+    <h1>{{ mensaje }}</h1>
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+            {{ form.as_p }}
+        <button type="submit">Enviar respuesta</button>
+    </form>
+    
+</body>
+{% endblock %}

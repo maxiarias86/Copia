@@ -12,14 +12,15 @@
 
 <body>
     <a class="btn btn-primary" href="{% url 'nuevoMensaje' %}">Nuevo Mensaje</a>
-    
+    <a class="btn btn-dark" href="{% url 'mensajes' %}">Inbox</a>
     {% for mensaje in mensajes %}
-    
+    {% if mensaje.remitente == request.user %}
     <h4>{{ mensaje.fecha }}</h4>
     <h2>{{ mensaje.titulo }}</h2>
     <h3>{{ mensaje.contenido }}</h3>
-    <h3>{{ mensaje.remitente }}</h3>
+    <h3>Para {{mensaje.destinatario}}</h3>
     <a class="btn btn-secondary" href="{% url 'responder' mensaje.id %}">Responder</a>
+    {% endif %}
     {% endfor %}
 </body>
 {% endblock %}

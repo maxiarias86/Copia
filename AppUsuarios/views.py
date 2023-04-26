@@ -9,17 +9,7 @@ import datetime
 def inicioUsuarios(request):
     return render (request, 'AppUsuarios/inicioUsuarios.html',{"avatar":obtenerAvatar(request)})
 
-@login_required
-def listarMensajes(request):
-    pass
-
-@login_required
-def responderMensaje(request):
-    pass
-
-@login_required
-def leerMensaje(request):
-    pass
+# LOGIN
 
 def login_request(request):
     if request.method == 'POST':
@@ -56,6 +46,7 @@ def register(request):
         form= RegistroUsuarioForm()
         return render(request, "AppUsuarios/register.html", {"form": form,"avatar":obtenerAvatar(request)})
 
+#PERFILES
 @login_required
 def editarPerfil(request):
     usuario=request.user
@@ -83,7 +74,6 @@ def obtenerAvatar(request):
     else:
         return "/media/avatars/default.png"
 
-# Despues para renderizarlo pongo {'avatar':obtenerAvatar()} en el render 
 
 @login_required
 def agregarAvatar(request):
@@ -102,6 +92,34 @@ def agregarAvatar(request):
     else:
         form=AvatarForm()
         return render(request, "AppUsuarios/agregarAvatar.html", {"form": form, "usuario": request.user, "avatar":obtenerAvatar(request)})
+
+@login_required
+def verPerfil(request):
+    pass
+
+# MENSAJERIA
+
+@login_required
+def responder(request, id):
+  mensaje_recibido=Mensaje.objects.get(id=id)
+  
+  if request.method =='POST':
+    form=RespuestaForm(request.POST)
+    if form.is_valid():
+      info=form.cleaned_data      
+      respuesta=Mensaje()
+      respuesta.remitente=request.user
+      respuesta.destinatario=mensaje_recibido.remitente
+      respuesta.titulo='Re-'+mensaje_recibido.titulo
+      respuesta.contenido=info["contenido"]
+      respuesta.fecha=datetime.date.today()
+            
+      respuesta.save()
+
+      return render(request,"AppUsuarios/inicioUsuarios.html", {"mensaje":'Mensaje respondido con éxito'})
+  else:
+    form=RespuestaForm()
+    return render(request, "AppUsuarios/responderMensaje.html", {"form": form})
 
 @login_required
 def nuevoMensaje(request):
@@ -130,8 +148,10 @@ def nuevoMensaje(request):
 def mensajes(request):
     mensajes=Mensaje.objects.all()
 
-    return render (request, 'AppUsuarios/mensajes.html', {'mensajes':mensajes})
+    return render (request, 'AppUsuarios/mensajesRecibidos.html', {'mensajes':mensajes})
 
 @login_required
-def verPerfil(request):
-    pass
+def mensajesEnviados(request):
+    mensajes=Mensaje.objects.all()
+
+    return render (request, 'AppUsuarios/mensajesEnviados.html', {'mensajes':mensajes})

@@ -33,3 +33,5 @@ class MensajeForm(forms.Form):
     titulo=forms.CharField(label='Asunto')
     contenido=forms.CharField(label='Mensaje de menos de 1000 caracteres')
 
+class RespuestaForm(forms.Form):
+    contenido=forms.CharField(label='Mensaje de menos de 1000 caracteres')

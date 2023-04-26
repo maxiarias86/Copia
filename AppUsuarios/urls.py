@@ -12,7 +12,9 @@ urlpatterns = [
     path('agregarAvatar/', agregarAvatar, name='agregarAvatar'),
     path('nuevoMensaje/', nuevoMensaje, name='nuevoMensaje'),
     path('mensajes/', mensajes, name='mensajes'),
+    path('mensajesEnviados', mensajesEnviados, name='mensajesEnviados'),
     path('verPerfil/', verPerfil, name='verPerfil'),
+    path('responder/<id>', responder, name='responder'),
     
     
 ]

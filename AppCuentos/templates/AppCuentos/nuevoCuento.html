@@ -13,7 +13,7 @@
 <body>
     <h1>{{ mensaje }}</h1>
     
-    <form action="{% url 'nuevoCuento' %}" method="POST">
+    <form action="{% url 'nuevoCuento' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
             {{ form.as_p }}
         <button type="submit">Agregar foto respectiva</button>

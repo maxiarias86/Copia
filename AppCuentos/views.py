@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
 from .forms import *
 from AppUsuarios.models import *
@@ -15,19 +15,18 @@ def verCuento(request, id):
     cuerpo=cuento.cuerpo
     autor=cuento.autor
     fecha=cuento.fecha
-    imagen=Foto.objects.get(cuento_id=id)
-    foto=imagen.foto.url
+    foto=cuento.foto.url
     
-    return render(request, {'categoria':categoria,'titulo':titulo,'subtitulo':subtitulo,'cuerpo':cuerpo,'autor':autor,'fecha':fecha,'foto':foto})
+    return render(request, 'AppCuentos/verCuento.html', {'categoria':categoria,'titulo':titulo,'subtitulo':subtitulo,'cuerpo':cuerpo,'autor':autor,'fecha':fecha,'foto':foto})
 
-@login_required
-def nuevaFoto(request):
+'''@login_required
+def nuevaFoto(request, id):
     if request.method=="POST":
         form=FotoForm(request.POST, request.FILES)
         if form.is_valid():
             info=form.cleaned_data
             foto=Foto()
-            foto.cuento=info['cuento']
+            foto.cuento=Cuento.objects.get(id=id)
             foto.foto=request.FILES["foto"]
             
             foto.save()
@@ -40,13 +39,12 @@ def nuevaFoto(request):
     else:
         form=FotoForm()
         return render(request, "AppCuentos/agregarFoto.html", {"form": form})
-
+'''
 @login_required
 def nuevoCuento(request):
     
     if request.method =='POST':
-        form=CuentoForm(request.POST)
-
+        form=CuentoForm(request.POST,request.FILES)
         if form.is_valid():
             info=form.cleaned_data
             
@@ -57,11 +55,11 @@ def nuevoCuento(request):
             cuento.titulo=info["titulo"]
             cuento.subtitulo=info['subtitulo']
             cuento.cuerpo=info['cuerpo']
+            cuento.foto=request.FILES["foto"]
             
             cuento.save()
 
-        
-            return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":'Cuento agregado'})
+            return redirect('inicioCuentos')
         else:
             return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":'Error al agregar el cuento'})
          

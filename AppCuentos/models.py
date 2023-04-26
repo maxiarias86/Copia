@@ -12,10 +12,7 @@ class Cuento(models.Model):
     subtitulo=models.CharField(max_length=100)
     cuerpo=models.CharField(max_length=100000)
     autor=models.ForeignKey(User, on_delete=models.CASCADE)
+    foto=models.ImageField(upload_to="fotos") #Hay que ponerlo en la carpeta media como el de avatars
 
     def __str__(self):
         return f'Título: {self.titulo}'
-
-class Foto(models.Model):
-    foto=models.ImageField(upload_to="fotos") #Hay que ponerlo en la carpeta media como el de avatars
-    cuento=models.ForeignKey(Cuento, on_delete=models.CASCADE)

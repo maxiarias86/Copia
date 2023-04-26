@@ -9,7 +9,4 @@ class CuentoForm(forms.Form):
     titulo=forms.CharField(label='Título')
     subtitulo=forms.CharField(label='Subtítulo')
     cuerpo=forms.CharField(label='Mil palabras')
-
-class FotoForm(forms.Form):
     foto=forms.ImageField(label='Foto')
-    cuento=forms.ModelChoiceField(queryset=Cuento.objects.all())

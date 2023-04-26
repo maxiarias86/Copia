@@ -7,6 +7,7 @@ from AppUsuarios.views import *
 # Create your views here.
 
 def verCuento(request, id):
+    
     cuento=Cuento.objects.get(id=id)
     categoria=cuento.categoria
     titulo=cuento.titulo
@@ -16,8 +17,10 @@ def verCuento(request, id):
     fecha=cuento.fecha
     imagen=Foto.objects.get(cuento_id=id)
     foto=imagen.foto.url
+    
     return render(request, {'categoria':categoria,'titulo':titulo,'subtitulo':subtitulo,'cuerpo':cuerpo,'autor':autor,'fecha':fecha,'foto':foto})
 
+@login_required
 def nuevaFoto(request):
     if request.method=="POST":
         form=FotoForm(request.POST, request.FILES)
@@ -28,14 +31,17 @@ def nuevaFoto(request):
             foto.foto=request.FILES["foto"]
             
             foto.save()
-    
-            return render(request, "AppCuentos/verCuento.html", {"mensaje":f"Cuento agregado correctamente", "foto":obtenerFoto(foto)})
+
+            cuentos=Cuento.objects.all()
+            return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":'Cuento cargado con éxito','cuentos':cuentos})
+
         else:
             return render(request, "AppCuentos/verCuento.html", {"mensaje":"Error al agregar foto"})
     else:
         form=FotoForm()
-        return render(request, "AppUsuarios/agregarFoto.html", {"form": form, "avatar":obtenerAvatar(request)})
+        return render(request, "AppCuentos/agregarFoto.html", {"form": form})
 
+@login_required
 def nuevoCuento(request):
     
     if request.method =='POST':
@@ -53,12 +59,12 @@ def nuevoCuento(request):
             cuento.cuerpo=info['cuerpo']
             
             cuento.save()
-            
+
+        
+            return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":'Cuento agregado'})
         else:
             return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":'Error al agregar el cuento'})
-        
-        cuentos=Cuento.objects.all()
-        return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":'Cuento cargado con éxito','cuentos':cuentos})
+         
     else:
         form=CuentoForm()
         return render(request, "AppCuentos/nuevoCuento.html", {"form": form})   

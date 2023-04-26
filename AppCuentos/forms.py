@@ -2,7 +2,7 @@ from django import forms
 import datetime
 from .models import *
 
-categorias=['Fantasia','Micro-Relato','Ciencia Ficción','Policial','Fábula','Terror']
+categorias=(('1','Fantasia'),('2','Micro-Relato'),('3','Ciencia Ficción'),('4','Policial'),('5','Fábula'),('6','Terror'))
 
 class CuentoForm(forms.Form):
     categoria=forms.ChoiceField(choices=categorias,label='Seleccione una categoria')

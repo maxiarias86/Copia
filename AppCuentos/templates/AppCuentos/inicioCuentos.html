@@ -12,16 +12,17 @@
 
 <body>
     <p> {{ mensaje }} </p>
-        <table>
         
-            {% for cuento in cuentos %}
+    {% for cuento in cuentos %}
             
-            {{ cuento.titulo }}
-            <a class="btn btn-danger" href="{% url 'verCuento'  cuento.id  %}">Ver Cuento </a>
+    <p>{{ cuento.titulo }}</p>
+    <p>{{ cuento.subtitulo }}</p>
+    <p>{{ cuento.autor }}</p>
+    <p>{{ cuento.id }}</p>
+    <a class="btn btn-danger" href="{% url 'verCuento'  cuento.id  %}">Ver Cuento </a>
 
-            {% endfor %}
+    {% endfor %}
 
-        </table>
     
 </body>
 {% endblock %}

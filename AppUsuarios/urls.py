@@ -16,6 +16,7 @@ urlpatterns = [
     path('verPerfil/', verPerfil, name='verPerfil'),
     path('responder/<id>', responder, name='responder'),
     path('editarPerfil', editarPerfil, name='editarPerfil'),
+    path('verMiPerfil', verMiPerfil, name='verMiPerfil'),
     
     
 ]

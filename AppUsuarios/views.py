@@ -121,7 +121,15 @@ def agregarAvatar(request):
 
 @login_required
 def verMiPerfil(request):
-    pass
+    username=request.user.username
+    email=request.user.email
+    avatar=obtenerAvatar(request)
+    perfil=Perfil.objects.get(user=request.user.id)
+    descripcion=perfil.descripcion
+    pagina=perfil.pagina
+
+    return render(request, 'AppUsuarios/verPerfil.html', {'username':username,'email':email,'avatar':avatar,'descripcion':descripcion,'pagina':pagina})
+
 
 def verPerfil(request, id):
     pass

@@ -4,25 +4,25 @@
 
 {% block titulo %}
                    
-<h1 class="fw-bolder">{{ usuario.username }}</h1>
+<h1 class="fw-bolder">{{ username }}</h1>
                     
 {% endblock %}
 
 {% block cuerpo %}
 
 <body>
-    <p> Estas viendo el perfil de {{ usuario }} </p>
-    <form action="{% url 'verPerfil'  %}" method="GET"> {% csrf_token %}
-
-        <table>
-        
-            {{ form.as_table }}
-        
-        </table>
-        
-        <input type="submit" value="MODIFICAR USUARIO">
-        
-        
+    <p> Estas viendo el perfil de {{ username }} </p>
+        <div class="card mb-4">
+            <a href="#!"><img class="card-img-top" src="{{ avatar }}" alt="avatar" /></a>
+            <div class="card-body">
+                <p class="card-text">{{ email }}</p>
+                <p class="card-text">{{ descripcion }}</p>
+                <p class="card-text">{{ pagina }}</p>
+                <a class="btn btn-primary" href="#!">Editar username, contraseña y/o email</a>
+                <a class="btn btn-primary" href="#!">Editar descripcion o WebPage</a>
+            </div>
+        </div>
+                
     </form>
     
 </body>

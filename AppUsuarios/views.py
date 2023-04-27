@@ -48,7 +48,7 @@ def register(request):
 
 #PERFILES
 @login_required
-def editarPerfil(request):
+def editarUser(request):
     usuario=request.user
 
     if request.method=="POST":
@@ -61,11 +61,37 @@ def editarPerfil(request):
             usuario.save()
             return render(request, "AppUsuarios/inicioUsuarios.html", {"mensaje":f"Usuario {usuario.username} editado correctamente","avatar":obtenerAvatar(request)})
         else:
-            return render(request, "AppUsuarios/editarPerfil.html", {"form": form, "nombreusuario":usuario.username,"avatar":obtenerAvatar(request)})
+            return render(request, "AppUsuarios/editarUser.html", {"form": form, "nombreusuario":usuario.username,"avatar":obtenerAvatar(request)})
     else:
         form=UserEditForm(instance=usuario)
-        return render(request, "AppUsuarios/editarPerfil.html", {"form": form, "nombreusuario":usuario.username,"avatar":obtenerAvatar(request)})
-    
+        return render(request, "AppUsuarios/editarUser.html", {"form": form, "nombreusuario":usuario.username,"avatar":obtenerAvatar(request)})
+
+@login_required
+def editarPerfil(request):
+    usuario=request.user
+
+    if request.method=="POST":
+        form=PerfilForm(request.POST)
+        if form.is_valid():
+            info=form.cleaned_data
+            perfil=Perfil()
+            perfil.user=request.user
+            perfil.descripcion=info['descripcion']
+            perfil.pagina=info['pagina']
+
+            perfilViejo=Perfil.objects.filter(user=request.user)
+            if len(perfilViejo)>0:
+                perfilViejo[0].delete()
+
+            perfil.save()
+            return render(request, "AppUsuarios/inicioUsuarios.html", {"mensaje":"Perfil editado correctamente","avatar":obtenerAvatar(request)})
+        else:
+            return render(request, "AppUsuarios/inicioUsuarios.html", {"mensaje":"Error en el fomulario","avatar":obtenerAvatar(request)})
+    else:
+        form=PerfilForm()
+        return render(request, "AppUsuarios/editarPerfil.html", {"form": form, "nombre_usuario":usuario.username,"avatar":obtenerAvatar(request)})
+ 
+
 @login_required
 def obtenerAvatar(request):
     avatares=Avatar.objects.filter(user=request.user.id)
@@ -94,8 +120,12 @@ def agregarAvatar(request):
         return render(request, "AppUsuarios/agregarAvatar.html", {"form": form, "usuario": request.user, "avatar":obtenerAvatar(request)})
 
 @login_required
-def verPerfil(request):
+def verMiPerfil(request):
     pass
+
+def verPerfil(request, id):
+    pass
+    
 
 # MENSAJERIA
 

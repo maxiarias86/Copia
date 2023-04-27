@@ -4,15 +4,15 @@
 
 {% block titulo %}
                    
-<h1 class="fw-bolder">Editar Perfil</h1>
+<h1 class="fw-bolder">Editar Usuario</h1>
                     
 {% endblock %}
 
 {% block cuerpo %}
 
 <body>
-    <p> Estas editando el perfil de {{ nombre_usuario }} </p>
-    <form action="{% url 'editarPerfil'  %}" method="POST"> {% csrf_token %}
+    <p> Estas editando al usuario: {{ nombreusuario }} </p>
+    <form action="{% url 'editarUser'  %}" method="POST"> {% csrf_token %}
 
         <table>
         
@@ -20,7 +20,7 @@
         
         </table>
         
-        <input type="submit" value="Edital Perfil">
+        <input type="submit" value="MODIFICAR USUARIO">
         
         
     </form>

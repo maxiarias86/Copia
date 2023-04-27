@@ -8,13 +8,14 @@ urlpatterns = [
     path('login/', login_request,name="login"),
     path('register/', register, name='register'),
     path('logout/', LogoutView.as_view(),name="logout"), #LogoutView.as_view(template_name='AppUsuarios/logout.html)... esto me permite personalizar la pagina de logout, sino puedo mandarlo a otra desde settings.py LOGOUT_REDIRECT_URL
-    path('editarPerfil/', editarPerfil, name='editarPerfil'),    
+    path('editarUser/', editarUser, name='editarUser'),    
     path('agregarAvatar/', agregarAvatar, name='agregarAvatar'),
     path('nuevoMensaje/', nuevoMensaje, name='nuevoMensaje'),
     path('mensajes/', mensajes, name='mensajes'),
     path('mensajesEnviados', mensajesEnviados, name='mensajesEnviados'),
     path('verPerfil/', verPerfil, name='verPerfil'),
     path('responder/<id>', responder, name='responder'),
+    path('editarPerfil', editarPerfil, name='editarPerfil'),
     
     
 ]

@@ -1,14 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User,AbstractBaseUser
+from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Usuario(models.Model):
-    usuario=models.ForeignKey(User, on_delete=models.CASCADE)
-    descripcion=models.CharField(max_length=20000)
-    pagina=models.URLField()
-    mail=models.EmailField(unique=True)
-    contra=models.CharField(max_length=15)
+class Perfil(models.Model):
+    user=models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
+    descripcion=models.CharField(max_length=20000,blank=True,null=True)
+    pagina=models.URLField(max_length=200,blank=True,null=True)
 
 class Avatar(models.Model):
     imagen=models.ImageField(upload_to="avatars")

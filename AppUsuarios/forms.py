@@ -35,3 +35,7 @@ class MensajeForm(forms.Form):
 
 class RespuestaForm(forms.Form):
     contenido=forms.CharField(label='Mensaje de menos de 1000 caracteres')
+
+class PerfilForm(forms.Form):
+    descripcion=forms.CharField(label='Ingrese una breve descripción de usted')
+    pagina=forms.URLField(label='Ingrese su Webpage')

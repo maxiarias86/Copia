@@ -12,13 +12,13 @@
 
 <body>
     <p> {{ mensaje }} </p>
-        
+    <a class="btn btn-danger" href="{% url 'nuevoCuento' %}">Crear nuevo cuento </a>    
     {% for cuento in cuentos %}
-            
+    
+    <p>{{ cuento.categoria }}</p>
     <p>{{ cuento.titulo }}</p>
-    <p>{{ cuento.subtitulo }}</p>
     <p>{{ cuento.autor }}</p>
-    <p>{{ cuento.id }}</p>
+    
     <a class="btn btn-danger" href="{% url 'verCuento'  cuento.id  %}">Ver Cuento </a>
 
     {% endfor %}

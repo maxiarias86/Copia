@@ -19,27 +19,6 @@ def verCuento(request, id):
     
     return render(request, 'AppCuentos/verCuento.html', {'categoria':categoria,'titulo':titulo,'subtitulo':subtitulo,'cuerpo':cuerpo,'autor':autor,'fecha':fecha,'foto':foto})
 
-'''@login_required
-def nuevaFoto(request, id):
-    if request.method=="POST":
-        form=FotoForm(request.POST, request.FILES)
-        if form.is_valid():
-            info=form.cleaned_data
-            foto=Foto()
-            foto.cuento=Cuento.objects.get(id=id)
-            foto.foto=request.FILES["foto"]
-            
-            foto.save()
-
-            cuentos=Cuento.objects.all()
-            return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":'Cuento cargado con éxito','cuentos':cuentos})
-
-        else:
-            return render(request, "AppCuentos/verCuento.html", {"mensaje":"Error al agregar foto"})
-    else:
-        form=FotoForm()
-        return render(request, "AppCuentos/agregarFoto.html", {"form": form})
-'''
 @login_required
 def nuevoCuento(request):
     
@@ -69,5 +48,6 @@ def nuevoCuento(request):
 
 def inicioCuentos(request):
     cuentos=Cuento.objects.all()
-    
-    return render(request,"AppCuentos/inicioCuentos.html", {'cuentos':cuentos})
+    if len(cuentos)==0:
+        mensaje="Aún no hay cuentos cargados... Inspirate y da el primer paso"
+    return render(request,"AppCuentos/inicioCuentos.html", {'cuentos':cuentos,'mensaje':mensaje})

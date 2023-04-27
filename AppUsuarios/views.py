@@ -124,15 +124,36 @@ def verMiPerfil(request):
     username=request.user.username
     email=request.user.email
     avatar=obtenerAvatar(request)
-    perfil=Perfil.objects.get(user=request.user.id)
-    descripcion=perfil.descripcion
-    pagina=perfil.pagina
-
+    perfil=Perfil.objects.filter(user=request.user.id)
+    if len(perfil)!=0:
+        descripcion=perfil[0].descripcion
+        pagina=perfil[0].pagina
+    else:
+        descripcion=''
+        pagina=''
+    
     return render(request, 'AppUsuarios/verPerfil.html', {'username':username,'email':email,'avatar':avatar,'descripcion':descripcion,'pagina':pagina})
 
 
 def verPerfil(request, id):
-    pass
+    user=User.objects.get(id=id)
+    username=user.username
+    email=user.email
+    perfil=Perfil.objects.filter(user=user.id)
+    if len(perfil)!=0:
+        descripcion=perfil[0].descripcion
+        pagina=perfil[0].pagina
+    else:
+        descripcion=''
+        pagina=''
+    avatares=Avatar.objects.filter(user=user.id)
+    if len(avatares)!=0:
+        avatar=avatares[0].imagen.url
+    else:
+        avatar="/media/avatars/default.png"
+
+    return render(request, 'AppUsuarios/verPerfil.html', {'username':username,'email':email,'avatar':avatar,'descripcion':descripcion,'pagina':pagina})
+
     
 
 # MENSAJERIA

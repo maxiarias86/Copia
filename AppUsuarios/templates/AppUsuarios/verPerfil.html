@@ -18,8 +18,9 @@
                 <p class="card-text">{{ email }}</p>
                 <p class="card-text">{{ descripcion }}</p>
                 <p class="card-text">{{ pagina }}</p>
-                <a class="btn btn-primary" href="#!">Editar username, contraseña y/o email</a>
-                <a class="btn btn-primary" href="#!">Editar descripcion o WebPage</a>
+                <a class="btn btn-primary" href="{% url 'editarUser' %}">Editar contraseña y/o email</a>
+                <a class="btn btn-primary" href="{% url 'editarPerfil' %}">Editar descripcion o WebPage</a>
+                <a class="btn btn-primary" href="{% url 'agregarAvatar' %}">Editar avatar</a>
             </div>
         </div>
                 

@@ -10,7 +10,7 @@
 
 {% block cuerpo %}
 <body>
-    <p> Agregar avatar a {{ usuario.username }} </p>
+    <p> Editar avatar de {{ usuario.username }} </p>
     <form action="{% url 'agregarAvatar' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
 
         <table>

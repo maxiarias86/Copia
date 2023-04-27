@@ -50,4 +50,6 @@ def inicioCuentos(request):
     cuentos=Cuento.objects.all()
     if len(cuentos)==0:
         mensaje="Aún no hay cuentos cargados... Inspirate y da el primer paso"
+    else:
+        mensaje=''
     return render(request,"AppCuentos/inicioCuentos.html", {'cuentos':cuentos,'mensaje':mensaje})

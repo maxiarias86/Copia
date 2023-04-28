@@ -156,7 +156,10 @@ def verPerfil(request, id):
 
     return render(request, 'AppUsuarios/verPerfil.html', {'id':id, 'username':username,'email':email,'avatar':avatar,'descripcion':descripcion,'pagina':pagina})
 
-    
+def eliminarUsuario(request):
+    request.user.delete()
+
+    return render(request, "AppUsuarios/logout.html", {'mensaje':f'{request.user.username}, su usuario ha sido eliminado'})
 
 # MENSAJERIA
 

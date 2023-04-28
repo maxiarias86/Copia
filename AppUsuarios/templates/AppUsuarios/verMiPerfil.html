@@ -11,7 +11,7 @@
 {% block cuerpo %}
 
 <body>
-    <p> Estas viendo el perfil de {{ username }} </p>
+    <p> </p>
         <div class="card mb-4">
             <a href="#!"><img class="card-img-top" src="{{ avatar }}" alt="avatar"/></a>
             <div class="card-body">
@@ -20,6 +20,10 @@
                 {% endif %}
                 <p class="card-text">{{ descripcion }}</p>
                 <p class="card-text">{{ pagina }}</p>
+                <a class="btn btn-primary" href="{% url 'editarUser' %}">Editar tu contraseña y/o email</a>
+                <a class="btn btn-primary" href="{% url 'editarPerfil' %}">Editar tu descripcion y/o WebPage</a>
+                <a class="btn btn-primary" href="{% url 'agregarAvatar' %}">Editar tu avatar</a>
+                <a class="btn btn-secondary" href="{% url 'agregarAvatar' %}">Buscador de perfiles</a>
             </div>
         </div>
                 

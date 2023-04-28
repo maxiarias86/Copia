@@ -6,8 +6,8 @@ from AppUsuarios.models import *
 
 class RegistroUsuarioForm(UserCreationForm):
     email=forms.EmailField(label="Email")
-    password1=forms.CharField(label="Contraseña", widget=forms.PasswordInput)
-    password2=forms.CharField(label="Repetir contraseña", widget=forms.PasswordInput)
+    password1=forms.CharField(label="Contraseña", widget=forms.PasswordInput,help_text='Ingrese una contraseña de 8 o más caracteres')
+    password2=forms.CharField(label="Repetir contraseña", widget=forms.PasswordInput,help_text='Repita la contraseña')
    
     class Meta:
         model=User

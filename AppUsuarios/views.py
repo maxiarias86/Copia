@@ -9,9 +9,6 @@ import datetime
 def inicioUsuarios(request):
     return render (request, 'AppUsuarios/inicioUsuarios.html',{"avatar":obtenerAvatar(request)})
 
-def bigPicture(request):
-    return render(request, 'AppUsuarios/bigPicture.html',{"avatar":obtenerAvatar(request)})
-
 def about(request):
     return render(request, 'AppUsuarios/about.html',{"avatar":obtenerAvatar(request)})
 # LOGIN
@@ -61,8 +58,8 @@ def editarUser(request):
         if form.is_valid():
             info=form.cleaned_data
             usuario.email=info["email"]
-            usuario.password1=info["password1"]
-            usuario.password2=info["password2"]
+            password=info["password1"]
+            usuario.set_password(password)
             usuario.save()
             return render(request, "AppUsuarios/inicioUsuarios.html", {"mensaje":f"Usuario {usuario.username} editado correctamente","avatar":obtenerAvatar(request)})
         else:
@@ -137,7 +134,7 @@ def verMiPerfil(request):
         descripcion=''
         pagina=''
     
-    return render(request, 'AppUsuarios/verPerfil.html', {'username':username,'email':email,'avatar':avatar,'descripcion':descripcion,'pagina':pagina})
+    return render(request, 'AppUsuarios/verMiPerfil.html', {'username':username,'email':email,'avatar':avatar,'descripcion':descripcion,'pagina':pagina})
 
 
 def verPerfil(request, id):

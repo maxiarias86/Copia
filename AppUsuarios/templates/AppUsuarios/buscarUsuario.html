@@ -1,0 +1,23 @@
+{% extends "AppUsuarios/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+                   
+<h1 class="fw-bolder">Buscar Usuario</h1>
+                    
+{% endblock %}
+
+{% block cuerpo %}
+
+<body>
+    <form action="{% url 'buscarUsuario' %}" method="GET"> 
+
+        <input type="text" name="username" id="username" placeholder="Nombre de Usuario">
+    
+        <input type="submit" value="buscar Usuario">
+    
+    </form>
+          
+</body>
+{% endblock %}

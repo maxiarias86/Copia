@@ -216,3 +216,14 @@ def mensajesEnviados(request):
     mensajes=Mensaje.objects.all()
 
     return render (request, 'AppUsuarios/mensajesEnviados.html', {'mensajes':mensajes})
+
+@login_required
+def buscarUsuario(request):
+    username=request.GET['username']
+    
+    if username!='':
+        usuarios=User.objects.filter(username__icontains=username)
+        return render(request, 'AppUsuarios/resultadosBusqueda.html',{'usuarios':usuarios})
+    else:
+        return render(request, 'AppUsuarios/buscarUsuarios.html',{'mensaje':'Ingrese un nombre a buscar'})
+

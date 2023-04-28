@@ -13,13 +13,23 @@
 <body>
     <p> {{ mensaje }} </p>
     <a class="btn btn-danger" href="{% url 'nuevoCuento' %}">Crear nuevo cuento </a>    
+    
+    <form action="{% url 'buscarCuento' %}" method="GET"> 
+
+        <input type="text" name="titulo" id="titulo" placeholder="Título">
+    
+        <input type="submit" value="buscar en Cuentos">
+    
+    
+    </form>
     {% for cuento in cuentos %}
     
     <p>{{ cuento.categoria }}</p>
     <p>{{ cuento.titulo }}</p>
     <p>{{ cuento.autor }}</p>
     
-    <a class="btn btn-danger" href="{% url 'verCuento'  cuento.id  %}">Ver Cuento </a>
+    <a class="btn btn-light" href="{% url 'verCuento'  cuento.id  %}">Ver Cuento </a>
+    <a class="btn btn-dark" href="{% url 'mensajeAlAutor'  cuento.id  %}">Mensaje al Autor </a>
 
     {% endfor %}
 

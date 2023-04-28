@@ -8,6 +8,8 @@ urlpatterns = [
     path("", inicioCuentos, name="inicioCuentos"),
     path("verCuento/<id>", verCuento, name="verCuento"),
     path('nuevoCuento', nuevoCuento, name='nuevoCuento'),
+    path('buscarCuento', buscarCuento, name='buscarCuento'),
+    path('mensajeAlAutor/<id>', mensajeAlAutor, name='mensajeAlAutor'),
     
     
 ]

@@ -3,6 +3,7 @@ from .models import *
 from .forms import *
 from AppUsuarios.models import *
 from AppUsuarios.views import *
+from AppUsuarios.forms import *
 from django.http import HttpResponse
 
 # Create your views here.
@@ -17,8 +18,9 @@ def verCuento(request, id):
     autor=cuento.autor
     fecha=cuento.fecha
     foto=cuento.foto.url
+    id=cuento.id
     
-    return render(request, 'AppCuentos/verCuento.html', {'categoria':categoria,'titulo':titulo,'subtitulo':subtitulo,'cuerpo':cuerpo,'autor':autor,'fecha':fecha,'foto':foto})
+    return render(request, 'AppCuentos/verCuento.html', {'id':id, 'categoria':categoria,'titulo':titulo,'subtitulo':subtitulo,'cuerpo':cuerpo,'autor':autor,'fecha':fecha,'foto':foto})
 
 @login_required
 def nuevoCuento(request):
@@ -54,3 +56,33 @@ def inicioCuentos(request):
     else:
         mensaje=''
     return render(request,"AppCuentos/inicioCuentos.html", {'cuentos':cuentos,'mensaje':mensaje})
+
+def buscarCuento(request):
+    titulo=request.GET['titulo']
+    if titulo!='':
+        cuentos=Cuento.objects.filter(titulo__icontains=titulo)
+        return render(request, 'AppCuentos/inicioCuentos.html',{'cuentos':cuentos})
+    else:
+        return render(request, 'AppCuentos/buscarCuento.html',{'mensaje':'Ingrese una palabra clave a buscar'})
+
+def mensajeAlAutor(request, id):
+    cuento=Cuento.objects.get(id=id)
+    if request.method =='POST':
+        form=MensajeAlAutorForm(request.POST)
+        
+        if form.is_valid():
+            info=form.cleaned_data
+            
+            mensaje=Mensaje()
+            mensaje.remitente=request.user
+            mensaje.titulo=info["titulo"]
+            mensaje.destinatario=cuento.autor
+            mensaje.contenido=info["contenido"]
+            mensaje.fecha=datetime.date.today()
+            
+            mensaje.save()
+
+            return render(request,"AppUsuarios/inicioUsuarios.html", {"mensaje":'Mensaje enviado con éxito',"avatar":obtenerAvatar(request)})
+    else:
+        form=MensajeAlAutorForm()
+        return render(request, "AppCuentos/mensajeAlAutor.html", {"form": form,"avatar":obtenerAvatar(request)})   

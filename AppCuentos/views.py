@@ -85,4 +85,11 @@ def mensajeAlAutor(request, id):
             return render(request,"AppUsuarios/inicioUsuarios.html", {"mensaje":'Mensaje enviado con éxito',"avatar":obtenerAvatar(request)})
     else:
         form=MensajeAlAutorForm()
-        return render(request, "AppCuentos/mensajeAlAutor.html", {"form": form,"avatar":obtenerAvatar(request)})   
+        return render(request, "AppCuentos/mensajeAlAutor.html", {"form": form,"avatar":obtenerAvatar(request)})
+
+
+def eliminarCuento(request, id):
+    cuento = Cuento.objects.get(id=id)
+    cuento.delete()
+
+    return render(request, "AppCuentos/inicioCuentos.html", {'mensaje':f'Cuento "{cuento.titulo}" eliminado '})

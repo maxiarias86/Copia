@@ -230,7 +230,8 @@ def buscarUsuario(request):
             return render(request, 'AppUsuarios/buscarUsuario.html',{'mensaje':'Ingrese un nombre a buscar'})
     else:
         return render(request, 'AppUsuarios/buscarUsuario.html')
-    
+
+@login_required    
 def mensajeAlUsuario(request, id):
     usuario=User.objects.get(id=id)
     if request.method =='POST':

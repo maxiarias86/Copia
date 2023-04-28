@@ -13,7 +13,7 @@
 <body>
     <p> Estas viendo el perfil de {{ username }} </p>
         <div class="card mb-4">
-            <a href="#!"><img class="card-img-top" src="{{ avatar }}" alt="avatar" /></a>
+            <a href="#!"><img class="card-img-top" src="{{ avatar }}" alt="avatar"/></a>
             <div class="card-body">
                 {% if user.is_authenticated %}
                 <p class="card-text">{{ email }}</p>

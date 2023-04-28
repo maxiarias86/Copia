@@ -18,6 +18,8 @@ urlpatterns = [
     path('editarPerfil', editarPerfil, name='editarPerfil'),
     path('verMiPerfil', verMiPerfil, name='verMiPerfil'),
     path('verPerfil/<id>', verPerfil, name='verPerfil'),
+    path('bigPicture/', bigPicture, name='bigPicture'),
+    path('about/', about, name='about'),
     
     
 ]

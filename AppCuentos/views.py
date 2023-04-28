@@ -3,6 +3,7 @@ from .models import *
 from .forms import *
 from AppUsuarios.models import *
 from AppUsuarios.views import *
+from django.http import HttpResponse
 
 # Create your views here.
 

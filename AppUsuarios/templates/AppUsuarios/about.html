@@ -1,0 +1,33 @@
+{% extends "AppUsuarios/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+                   
+<h1 class="fw-bolder">Algunas palabras del autor...</h1>
+                    
+{% endblock %}
+
+{% block cuerpo %}
+
+<body>
+    <article>
+        <!-- Post header-->
+        
+        <!-- Preview image figure-->
+       
+        <!-- Post content-->
+        <section class="mb-5">
+            <p class="fs-5 mb-4">Argentino.</p>
+            <p class="fs-5 mb-4">Llegué al mundo algo tarde... solo unos pocos días después de que el Diego alzara la copa del mundo en el Azteca.</p>
+            <p class="fs-5 mb-4">Médico de profesión. Diploma de honor en la Universidad de Buenos Aires. Especialista en Medicina Materno-Fetal y Genética Reproductiva.</p>
+            <p class="fs-5 mb-4">Convencido de que la vida es corta pero que uno debe tomar nuevos rumbos si el corazón así se lo dicta...</p>
+        </section>
+        <header class="mb-4">
+            <!-- Post title-->
+            <h1 class="fw-bolder mb-1">Padre de Cuba</h1>
+        </header>
+        <figure class="mb-4"><img class="img-fluid rounded" src="/media/avatars/about.png" alt="..." width="600" height="600"/></figure>
+    </article>
+</body>
+{% endblock %}

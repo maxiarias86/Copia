@@ -9,6 +9,11 @@ import datetime
 def inicioUsuarios(request):
     return render (request, 'AppUsuarios/inicioUsuarios.html',{"avatar":obtenerAvatar(request)})
 
+def bigPicture(request):
+    return render(request, 'AppUsuarios/bigPicture.html',{"avatar":obtenerAvatar(request)})
+
+def about(request):
+    return render(request, 'AppUsuarios/about.html',{"avatar":obtenerAvatar(request)})
 # LOGIN
 
 def login_request(request):

@@ -5,22 +5,23 @@
 {% block titulo %}
                    
 <h1 class="fw-bolder">Cuentos</h1>
-                    
+<a class="btn btn-secondary" href="{% url 'nuevoCuento' %}">Crear nuevo cuento </a> 
+<form action="{% url 'buscarCuento' %}" method="GET"> 
+
+    <input type="text" name="titulo" id="titulo" placeholder="Título">
+
+    <input type="submit" value="Buscar en Cuentos">
+
+</form>
+
 {% endblock %}
 
 {% block cuerpo %}
 
 <body>
     <p> {{ mensaje }} </p>
-    <a class="btn btn-danger" href="{% url 'nuevoCuento' %}">Crear nuevo cuento </a>    
+       
     
-    <form action="{% url 'buscarCuento' %}" method="GET"> 
-
-        <input type="text" name="titulo" id="titulo" placeholder="Título">
-    
-        <input type="submit" value="buscar en Cuentos">
-    
-    </form>
     {% for cuento in cuentos %}
     
     <p>{{ cuento.categoria }}</p>

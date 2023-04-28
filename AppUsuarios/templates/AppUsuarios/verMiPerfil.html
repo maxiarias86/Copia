@@ -5,7 +5,9 @@
 {% block titulo %}
                    
 <h1 class="fw-bolder">{{ username }}</h1>
-                    
+<div>
+    <a class="btn btn-secondary" href="{% url 'buscarUsuario' %}">Buscador de perfiles</a>
+</div>               
 {% endblock %}
 
 {% block cuerpo %}
@@ -23,7 +25,6 @@
                 <a class="btn btn-primary" href="{% url 'editarUser' %}">Editar tu contraseña y/o email</a>
                 <a class="btn btn-primary" href="{% url 'editarPerfil' %}">Editar tu descripcion y/o WebPage</a>
                 <a class="btn btn-primary" href="{% url 'agregarAvatar' %}">Editar tu avatar</a>
-                <a class="btn btn-secondary" href="{% url 'buscarUsuario' %}">Buscador de perfiles</a>
             </div>
         </div>
                 

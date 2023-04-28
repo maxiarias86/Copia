@@ -20,6 +20,7 @@ urlpatterns = [
     path('verPerfil/<id>', verPerfil, name='verPerfil'),
     path('about/', about, name='about'),
     path('buscarUsuario', buscarUsuario, name='buscarUsuario'),
+    path('mensajeAlUsuario/<id>', mensajeAlUsuario, name='mensajeAlUsuario'),
 
 
 ]

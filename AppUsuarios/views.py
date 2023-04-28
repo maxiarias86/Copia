@@ -154,7 +154,7 @@ def verPerfil(request, id):
     else:
         avatar="/media/avatars/default.png"
 
-    return render(request, 'AppUsuarios/verPerfil.html', {'username':username,'email':email,'avatar':avatar,'descripcion':descripcion,'pagina':pagina})
+    return render(request, 'AppUsuarios/verPerfil.html', {'id':id, 'username':username,'email':email,'avatar':avatar,'descripcion':descripcion,'pagina':pagina})
 
     
 
@@ -219,11 +219,37 @@ def mensajesEnviados(request):
 
 @login_required
 def buscarUsuario(request):
-    username=request.GET['username']
+    if request.method == 'POST':
+        username=request.POST['username']
     
-    if username!='':
-        usuarios=User.objects.filter(username__icontains=username)
-        return render(request, 'AppUsuarios/resultadosBusqueda.html',{'usuarios':usuarios})
+        if username!='':
+            usuarios=User.objects.filter(username__icontains=username)
+            
+            return render(request, 'AppUsuarios/buscarUsuario.html',{'usuarios':usuarios})
+        else:
+            return render(request, 'AppUsuarios/buscarUsuario.html',{'mensaje':'Ingrese un nombre a buscar'})
     else:
-        return render(request, 'AppUsuarios/buscarUsuarios.html',{'mensaje':'Ingrese un nombre a buscar'})
+        return render(request, 'AppUsuarios/buscarUsuario.html')
+    
+def mensajeAlUsuario(request, id):
+    usuario=User.objects.get(id=id)
+    if request.method =='POST':
+        form=MensajeAlAutorForm(request.POST)
+        
+        if form.is_valid():
+            info=form.cleaned_data
+            
+            mensaje=Mensaje()
+            mensaje.remitente=request.user
+            mensaje.titulo=info["titulo"]
+            mensaje.destinatario=usuario
+            mensaje.contenido=info["contenido"]
+            mensaje.fecha=datetime.date.today()
+            
+            mensaje.save()
+
+            return render(request,"AppUsuarios/inicioUsuarios.html", {"mensaje":'Mensaje enviado con éxito',"avatar":obtenerAvatar(request)})
+    else:
+        form=MensajeAlAutorForm()
+        return render(request, "AppCuentos/mensajeAlAutor.html", {"form": form,"avatar":obtenerAvatar(request)})  
 

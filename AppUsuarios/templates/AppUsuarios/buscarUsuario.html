@@ -11,13 +11,25 @@
 {% block cuerpo %}
 
 <body>
-    <form action="{% url 'buscarUsuario' %}" method="GET"> 
+    <form action="{% url 'buscarUsuario' %}" method="POST"> {% csrf_token %}
 
         <input type="text" name="username" id="username" placeholder="Nombre de Usuario">
     
         <input type="submit" value="buscar Usuario">
+        <p>{{ mensaje }}</p>
     
     </form>
-          
+    
+    <div>
+
+        {% for usuario in usuarios %}
+        <p>{{ usuario.username }}</p>
+        <a class="btn btn-secondary" href="{% url 'verPerfil' usuario.id %}">Ver Usuario</a>
+        {% endfor %}
+
+    </div>
+
+
+
 </body>
 {% endblock %}

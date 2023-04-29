@@ -65,6 +65,7 @@ def buscarCuento(request):
     else:
         return render(request, 'AppCuentos/buscarCuento.html',{'mensaje':'Ingrese una palabra clave a buscar'})
 
+@login_required
 def mensajeAlAutor(request, id):
     cuento=Cuento.objects.get(id=id)
     if request.method =='POST':
@@ -87,13 +88,14 @@ def mensajeAlAutor(request, id):
         form=MensajeAlAutorForm()
         return render(request, "AppCuentos/mensajeAlAutor.html", {"form": form,"avatar":obtenerAvatar(request)})
 
-
+@login_required
 def eliminarCuento(request, id):
     cuento = Cuento.objects.get(id=id)
     cuento.delete()
 
     return render(request, "AppCuentos/inicioCuentos.html", {'mensaje':f'Cuento "{cuento.titulo}" eliminado '})
 
+@login_required
 def misCuentos(request):
     cuentos=Cuento.objects.all()
     if len(cuentos)==0:
@@ -101,3 +103,13 @@ def misCuentos(request):
     else:
         mensaje=''
     return render(request,"AppCuentos/misCuentos.html", {'cuentos':cuentos,'mensaje':mensaje})
+
+def buscarPorCategoria(request):
+    if request.method == 'POST':
+        categoria=request.POST['categoria']
+        cuentos=Cuento.objects.filter(categoria__icontains=categoria)
+
+        return render (request, 'AppCuentos/inicioCuentos.html', {'cuentos':cuentos})
+    else:
+        form=buscarPorCategoriaForm()
+        return render (request, 'AppCuentos/buscarPorCategoria.html', {'form':form})

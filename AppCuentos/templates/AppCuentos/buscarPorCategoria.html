@@ -1,0 +1,33 @@
+{% extends "AppUsuarios/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+                   
+<h1 class="fw-bolder">Buscar Cuentos por Categoría</h1>
+                    
+{% endblock %}
+
+{% block cuerpo %}
+
+<body>
+    <form action="{% url 'buscarPorCategoria' %}" method="POST"> {% csrf_token %}
+
+        {{ form.as_table }}
+        <input type="submit" value="Filtrar">
+    </form>
+    
+    <div>
+
+        {% for cuento in cuentos %}
+        
+        
+        <p>{{ cuento.titulo }}</p>
+
+
+        {% endfor %}
+
+    </div>
+
+</body>
+{% endblock %}

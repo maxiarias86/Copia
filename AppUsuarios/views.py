@@ -11,6 +11,9 @@ def inicioUsuarios(request):
 
 def about(request):
     return render(request, 'AppUsuarios/about.html',{"avatar":obtenerAvatar(request)})
+
+
+
 # LOGIN
 
 def login_request(request):
@@ -47,6 +50,8 @@ def register(request):
     else:
         form= RegistroUsuarioForm()
         return render(request, "AppUsuarios/register.html", {"form": form,"avatar":obtenerAvatar(request)})
+
+
 
 #PERFILES
 @login_required
@@ -161,6 +166,20 @@ def eliminarUsuario(request):
 
     return render(request, "AppUsuarios/logout.html", {'mensaje':f'{request.user.username}, su usuario ha sido eliminado'})
 
+def buscarUsuario(request):
+    if request.method == 'POST':
+        username=request.POST['username']
+    
+        if username!='':
+            usuarios=User.objects.filter(username__icontains=username)
+            
+            return render(request, 'AppUsuarios/buscarUsuario.html',{'usuarios':usuarios})
+        else:
+            return render(request, 'AppUsuarios/buscarUsuario.html',{'mensaje':'Ingrese un nombre a buscar'})
+    else:
+        return render(request, 'AppUsuarios/buscarUsuario.html')
+
+
 # MENSAJERIA
 
 @login_required
@@ -220,19 +239,6 @@ def mensajesEnviados(request):
 
     return render (request, 'AppUsuarios/mensajesEnviados.html', {'mensajes':mensajes})
 
-@login_required
-def buscarUsuario(request):
-    if request.method == 'POST':
-        username=request.POST['username']
-    
-        if username!='':
-            usuarios=User.objects.filter(username__icontains=username)
-            
-            return render(request, 'AppUsuarios/buscarUsuario.html',{'usuarios':usuarios})
-        else:
-            return render(request, 'AppUsuarios/buscarUsuario.html',{'mensaje':'Ingrese un nombre a buscar'})
-    else:
-        return render(request, 'AppUsuarios/buscarUsuario.html')
 
 @login_required    
 def mensajeAlUsuario(request, id):

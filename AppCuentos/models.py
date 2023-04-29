@@ -15,4 +15,4 @@ class Cuento(models.Model):
     foto=models.ImageField(upload_to="fotos") #Hay que ponerlo en la carpeta media como el de avatars
 
     def __str__(self):
-        return f'Título: {self.titulo}'
+        return f'Título: {self.titulo} - Autor: {self.autor}'

@@ -10,3 +10,6 @@ class CuentoForm(forms.Form):
     subtitulo=forms.CharField(label='Subtítulo')
     cuerpo=forms.CharField(label='Mil palabras')
     foto=forms.ImageField(label='Foto')
+
+class buscarPorCategoriaForm(forms.Form):
+    categoria=forms.ChoiceField(choices=categorias,label='Seleccione una categoria')

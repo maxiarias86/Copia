@@ -93,3 +93,11 @@ def eliminarCuento(request, id):
     cuento.delete()
 
     return render(request, "AppCuentos/inicioCuentos.html", {'mensaje':f'Cuento "{cuento.titulo}" eliminado '})
+
+def misCuentos(request):
+    cuentos=Cuento.objects.all()
+    if len(cuentos)==0:
+        mensaje="Aún no hay cuentos cargados... Inspirate y da el primer paso"
+    else:
+        mensaje=''
+    return render(request,"AppCuentos/misCuentos.html", {'cuentos':cuentos,'mensaje':mensaje})

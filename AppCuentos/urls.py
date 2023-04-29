@@ -11,6 +11,7 @@ urlpatterns = [
     path('buscarCuento', buscarCuento, name='buscarCuento'),
     path('mensajeAlAutor/<id>', mensajeAlAutor, name='mensajeAlAutor'),
     path('eliminarCuento/<id>', eliminarCuento, name='eliminarCuento'),
+    path('misCuentos/', misCuentos, name='misCuentos'),
     
     
 ]

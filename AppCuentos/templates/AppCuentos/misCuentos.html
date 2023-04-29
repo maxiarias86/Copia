@@ -4,9 +4,9 @@
 
 {% block titulo %}
                    
-<h1 class="fw-bolder">Cuentos</h1>
+<h1 class="fw-bolder">Mis Cuentos</h1>
 <a class="btn btn-secondary" href="{% url 'nuevoCuento' %}">Crear nuevo cuento</a>
-<a class="btn btn-secondary" href="{% url 'misCuentos' %}">Mis cuentos</a> 
+<a class="btn btn-secondary" href="{% url 'inicioCuentos' %}">Todos los Cuentos</a> 
 <form action="{% url 'buscarCuento' %}" method="GET"> 
 
     <input type="text" name="titulo" id="titulo" placeholder="Título">
@@ -24,14 +24,11 @@
        
     
     {% for cuento in cuentos %}
-    
+    {% if cuento.autor == request.user %}
     <p>{{ cuento.categoria }}</p>
     <p>{{ cuento.titulo }}</p>
     <p>{{ cuento.autor }}</p>
-    
     <a class="btn btn-light" href="{% url 'verCuento'  cuento.id  %}">Ver Cuento </a>
-    <a class="btn btn-dark" href="{% url 'mensajeAlAutor'  cuento.id  %}">Mensaje al Autor </a>
-    {% if cuento.autor == request.user %}
     <a class="btn btn-danger" href="{% url 'eliminarCuento'  cuento.id  %}">Eliminar cuento </a>
     {% endif %}
 

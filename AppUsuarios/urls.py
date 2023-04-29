@@ -22,6 +22,7 @@ urlpatterns = [
     path('buscarUsuario', buscarUsuario, name='buscarUsuario'),
     path('mensajeAlUsuario/<id>', mensajeAlUsuario, name='mensajeAlUsuario'),
     path('eliminarUsuario/', eliminarUsuario, name='eliminarUsuario'),
+    path('confEliminar/', confEliminar, name='confEliminar'),
 
 
 ]

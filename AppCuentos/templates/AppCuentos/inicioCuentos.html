@@ -15,13 +15,13 @@
     <input type="submit" value="Buscar en Cuentos">
 
 </form>
+<p class="fs-5 mb-4">{{ mensaje }}</p>                    
 
 {% endblock %}
 
 {% block cuerpo %}
 
 <body>
-    <p> {{ mensaje }} </p>
        
     
     {% for cuento in cuentos %}

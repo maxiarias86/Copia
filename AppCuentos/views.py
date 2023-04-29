@@ -67,7 +67,11 @@ def buscarCuento(request):
     titulo=request.GET['titulo']
     if titulo!='':
         cuentos=Cuento.objects.filter(titulo__icontains=titulo)
-        return render(request, 'AppCuentos/inicioCuentos.html',{'cuentos':cuentos,"avatar":obtenerAvatar(request)})
+        if len(cuentos)==0:
+                mensaje='No existen cuentos con ese título'
+        else:
+            mensaje=''
+        return render(request, 'AppCuentos/inicioCuentos.html',{'mensaje':mensaje,'cuentos':cuentos,"avatar":obtenerAvatar(request)})
     else:
         return render(request, 'AppCuentos/buscarCuento.html',{'mensaje':'Ingrese una palabra clave a buscar',"avatar":obtenerAvatar(request)})
 
@@ -114,8 +118,12 @@ def buscarPorCategoria(request):
     if request.method == 'POST':
         categoria=request.POST['categoria']
         cuentos=Cuento.objects.filter(categoria__icontains=categoria)
+        if len(cuentos)==0:
+                mensaje=f'Aún no hay cuentos de {categoria}, inspírate y carga el primero'
+        else:
+            mensaje=''
 
-        return render (request, 'AppCuentos/inicioCuentos.html', {'cuentos':cuentos,"avatar":obtenerAvatar(request)})
+        return render (request, 'AppCuentos/inicioCuentos.html', {'mensaje':mensaje,'cuentos':cuentos,"avatar":obtenerAvatar(request)})
     else:
         form=buscarPorCategoriaForm()
         return render (request, 'AppCuentos/buscarPorCategoria.html', {'form':form,"avatar":obtenerAvatar(request)})

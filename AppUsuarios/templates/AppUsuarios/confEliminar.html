@@ -1,0 +1,11 @@
+{% extends "AppUsuarios/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+                   
+<h1 class="fw-bolder">Eliminar {{ request.user.username }}?</h1>
+<a class="btn btn-danger" href="{% url 'eliminarUsuario' %}">CONFIRMAR</a>
+<a class="btn btn-primary" href="{% url 'verMiPerfil' %}">CANCELAR</a>
+                    
+{% endblock %}

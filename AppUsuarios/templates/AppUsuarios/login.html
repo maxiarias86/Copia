@@ -5,13 +5,14 @@
 {% block titulo %}
                    
 <h1 class="fw-bolder">Login</h1>
-                    
+<p class="fs-5 mb-4">{{ mensaje }}</p>                    
+
 {% endblock %}
 
 {% block cuerpo %}
 
+
 <body>
-    <h1>{{ mensaje }}</h1>
     
     <form action="" method="POST">
         {% csrf_token %}

@@ -5,25 +5,27 @@
 {% block titulo %}
                    
 <h1 class="fw-bolder">Buscar Usuario</h1>
+<form action="{% url 'buscarUsuario' %}" method="POST"> {% csrf_token %}
+
+    <input type="text" name="username" id="username" placeholder="Nombre de Usuario">
+
+    <input type="submit" value="buscar Usuario">
+    <p class="fs-5 mb-4">{{ mensaje }}</p>
+
+
+</form>
                     
 {% endblock %}
 
 {% block cuerpo %}
 
 <body>
-    <form action="{% url 'buscarUsuario' %}" method="POST"> {% csrf_token %}
-
-        <input type="text" name="username" id="username" placeholder="Nombre de Usuario">
     
-        <input type="submit" value="buscar Usuario">
-        <p>{{ mensaje }}</p>
-    
-    </form>
     
     <div>
 
         {% for usuario in usuarios %}
-        <p>{{ usuario.username }}</p>
+        <h1 class="fw-bolder mb-1">{{ usuario.username }}</h1>
         <a class="btn btn-secondary" href="{% url 'verPerfil' usuario.id %}">Ver Usuario</a>
         {% endfor %}
 

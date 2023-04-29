@@ -17,10 +17,10 @@
     
     {% for mensaje in mensajes %}
     {% if mensaje.destinatario == request.user %}
-    <h4>{{ mensaje.fecha }}</h4>
-    <h2>{{ mensaje.titulo }}</h2>
-    <h3>{{ mensaje.contenido }}</h3>
-    <h3>De {{ mensaje.remitente }} para {{mensaje.destinatario}}</h3>
+    <div class="text-muted fst-italic mb-2">{{ mensaje.fecha }}</div>
+    <h1 class="fw-bolder mb-1">{{ mensaje.titulo }}</h1>
+    <p class="fs-5 mb-4">{{ mensaje.contenido }}</p>
+    <p class="fs-5 mb-4">De {{ mensaje.remitente }} para {{mensaje.destinatario}}</p>
     <a class="btn btn-secondary" href="{% url 'responder' mensaje.id %}">Responder</a>
     {% endif %}
     {% endfor %}

@@ -28,7 +28,7 @@ def login_request(request):
 
             if user is not None:
                 login(request, user)
-                return render(request,'AppUsuarios/inicioUsuarios.html', {'mensaje':f"Bienvenido {usuario}","avatar":obtenerAvatar(request)})
+                return render(request,'AppUsuarios/inicioUsuarios.html', {'mensaje':f"Hola {usuario}","avatar":obtenerAvatar(request)})
             else:
                 return render(request,'AppUsuarios/login.html', {"avatar":obtenerAvatar(request),'form':form, 'mensaje':"Usuario y/o Contraseña incorrectos","avatar":obtenerAvatar(request)})
         else:
@@ -172,13 +172,20 @@ def buscarUsuario(request):
     
         if username!='':
             usuarios=User.objects.filter(username__icontains=username)
+            if len(usuarios)==0:
+                mensaje='No existen usuarios con ese nombre'
+            else:
+                mensaje=''
             
-            return render(request, 'AppUsuarios/buscarUsuario.html',{'usuarios':usuarios,"avatar":obtenerAvatar(request)})
+            return render(request, 'AppUsuarios/buscarUsuario.html',{'usuarios':usuarios,'mensaje':mensaje,"avatar":obtenerAvatar(request)})
         else:
             return render(request, 'AppUsuarios/buscarUsuario.html',{'mensaje':'Ingrese un nombre a buscar',"avatar":obtenerAvatar(request)})
     else:
         return render(request, 'AppUsuarios/buscarUsuario.html',{"avatar":obtenerAvatar(request)})
 
+@login_required
+def confEliminar(request):
+    return render(request, 'AppUsuarios/confEliminar.html',{"avatar":obtenerAvatar(request)})
 
 # MENSAJERIA
 

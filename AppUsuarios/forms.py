@@ -41,5 +41,5 @@ class RespuestaForm(forms.Form):
     contenido=forms.CharField(label='Mensaje',max_length=1000,help_text='Ingrese un mensaje de menos de 1000 caracteres')
 
 class PerfilForm(forms.Form):
-    descripcion=forms.CharField(label='Descripción',help_text='Ingrese una breve descripción de usted')
-    pagina=forms.URLField(label='Web Page',help_text='Ingrese su Webpage')
+    descripcion=forms.CharField(required=False,label='Descripción',help_text='Ingrese una breve descripción de usted')
+    pagina=forms.URLField(required=False,label='Web Page',help_text='Ingrese su Webpage')

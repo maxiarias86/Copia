@@ -6,7 +6,7 @@ from AppUsuarios.models import *
 
 class RegistroUsuarioForm(UserCreationForm):
     email=forms.EmailField(label="Email")
-    password1=forms.CharField(label="Contraseña", widget=forms.PasswordInput,help_text='Ingrese una contraseña de 8 o más caracteres')
+    password1=forms.CharField(label="Contraseña", widget=forms.PasswordInput,help_text='Ingrese una contraseña alfanumérica de 8 o más caracteres')
     password2=forms.CharField(label="Repetir contraseña", widget=forms.PasswordInput,help_text='Repita la contraseña')
    
     class Meta:
@@ -31,15 +31,15 @@ class AvatarForm(forms.Form):
 class MensajeForm(forms.Form):
     destinatario=forms.ModelChoiceField(queryset=User.objects.all())
     titulo=forms.CharField(label='Asunto')
-    contenido=forms.CharField(label='Mensaje de menos de 1000 caracteres')
+    contenido=forms.CharField(label='Mensaje',max_length=1000,help_text='Ingrese un mensaje de menos de 1000 caracteres')
 
 class MensajeAlAutorForm(forms.Form):
     titulo=forms.CharField(label='Asunto')
-    contenido=forms.CharField(label='Mensaje de menos de 1000 caracteres')    
+    contenido=forms.CharField(label='Mensaje',max_length=1000,help_text='Ingrese un mensaje de menos de 1000 caracteres')    
 
 class RespuestaForm(forms.Form):
-    contenido=forms.CharField(label='Mensaje de menos de 1000 caracteres')
+    contenido=forms.CharField(label='Mensaje',max_length=1000,help_text='Ingrese un mensaje de menos de 1000 caracteres')
 
 class PerfilForm(forms.Form):
-    descripcion=forms.CharField(label='Ingrese una breve descripción de usted')
-    pagina=forms.URLField(label='Ingrese su Webpage')
+    descripcion=forms.CharField(label='Descripción',help_text='Ingrese una breve descripción de usted')
+    pagina=forms.URLField(label='Web Page',help_text='Ingrese su Webpage')

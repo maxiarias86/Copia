@@ -20,7 +20,7 @@ def verCuento(request, id):
     foto=cuento.foto.url
     id=cuento.id
     
-    return render(request, 'AppCuentos/verCuento.html', {'id':id, 'categoria':categoria,'titulo':titulo,'subtitulo':subtitulo,'cuerpo':cuerpo,'autor':autor,'fecha':fecha,'foto':foto})
+    return render(request, 'AppCuentos/verCuento.html', {'id':id, 'categoria':categoria,'titulo':titulo,'subtitulo':subtitulo,'cuerpo':cuerpo,'autor':autor,'fecha':fecha,'foto':foto,"avatar":obtenerAvatar(request)})
 
 @login_required
 def nuevoCuento(request):
@@ -43,11 +43,11 @@ def nuevoCuento(request):
 
             return redirect('inicioCuentos')
         else:
-            return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":'Error al agregar el cuento'})
+            return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":'Error al agregar el cuento',"avatar":obtenerAvatar(request)})
          
     else:
         form=CuentoForm()
-        return render(request, "AppCuentos/nuevoCuento.html", {"form": form})   
+        return render(request, "AppCuentos/nuevoCuento.html", {"form": form,"avatar":obtenerAvatar(request)})   
 
 def inicioCuentos(request):
     cuentos=Cuento.objects.all()
@@ -55,15 +55,15 @@ def inicioCuentos(request):
         mensaje="Aún no hay cuentos cargados... Inspirate y da el primer paso"
     else:
         mensaje=''
-    return render(request,"AppCuentos/inicioCuentos.html", {'cuentos':cuentos,'mensaje':mensaje})
+    return render(request,"AppCuentos/inicioCuentos.html", {'cuentos':cuentos,'mensaje':mensaje,"avatar":obtenerAvatar(request)})
 
 def buscarCuento(request):
     titulo=request.GET['titulo']
     if titulo!='':
         cuentos=Cuento.objects.filter(titulo__icontains=titulo)
-        return render(request, 'AppCuentos/inicioCuentos.html',{'cuentos':cuentos})
+        return render(request, 'AppCuentos/inicioCuentos.html',{'cuentos':cuentos,"avatar":obtenerAvatar(request)})
     else:
-        return render(request, 'AppCuentos/buscarCuento.html',{'mensaje':'Ingrese una palabra clave a buscar'})
+        return render(request, 'AppCuentos/buscarCuento.html',{'mensaje':'Ingrese una palabra clave a buscar',"avatar":obtenerAvatar(request)})
 
 @login_required
 def mensajeAlAutor(request, id):
@@ -93,7 +93,7 @@ def eliminarCuento(request, id):
     cuento = Cuento.objects.get(id=id)
     cuento.delete()
 
-    return render(request, "AppCuentos/inicioCuentos.html", {'mensaje':f'Cuento "{cuento.titulo}" eliminado '})
+    return render(request, "AppCuentos/inicioCuentos.html", {'mensaje':f'Cuento "{cuento.titulo}" eliminado ',"avatar":obtenerAvatar(request)})
 
 @login_required
 def misCuentos(request):
@@ -102,14 +102,14 @@ def misCuentos(request):
         mensaje="Aún no hay cuentos cargados... Inspirate y da el primer paso"
     else:
         mensaje=''
-    return render(request,"AppCuentos/misCuentos.html", {'cuentos':cuentos,'mensaje':mensaje})
+    return render(request,"AppCuentos/misCuentos.html", {'cuentos':cuentos,'mensaje':mensaje,"avatar":obtenerAvatar(request)})
 
 def buscarPorCategoria(request):
     if request.method == 'POST':
         categoria=request.POST['categoria']
         cuentos=Cuento.objects.filter(categoria__icontains=categoria)
 
-        return render (request, 'AppCuentos/inicioCuentos.html', {'cuentos':cuentos})
+        return render (request, 'AppCuentos/inicioCuentos.html', {'cuentos':cuentos,"avatar":obtenerAvatar(request)})
     else:
         form=buscarPorCategoriaForm()
-        return render (request, 'AppCuentos/buscarPorCategoria.html', {'form':form})
+        return render (request, 'AppCuentos/buscarPorCategoria.html', {'form':form,"avatar":obtenerAvatar(request)})

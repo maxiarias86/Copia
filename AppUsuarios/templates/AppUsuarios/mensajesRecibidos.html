@@ -4,15 +4,16 @@
 
 {% block titulo %}
                    
-<h1 class="fw-bolder">Mensajería</h1>
+<h1 class="fw-bolder">Inbox</h1>
+<a class="btn btn-primary" href="{% url 'nuevoMensaje' %}">Nuevo Mensaje</a>
+<a class="btn btn-dark" href="{% url 'mensajesEnviados' %}">Mensajes Enviados</a>
                     
 {% endblock %}
 
 {% block cuerpo %}
 
 <body>
-    <a class="btn btn-primary" href="{% url 'nuevoMensaje' %}">Nuevo Mensaje</a>
-    <a class="btn btn-dark" href="{% url 'mensajesEnviados' %}">Mensajes Enviados</a>
+    
     
     {% for mensaje in mensajes %}
     {% if mensaje.destinatario == request.user %}

@@ -30,9 +30,9 @@ def login_request(request):
                 login(request, user)
                 return render(request,'AppUsuarios/inicioUsuarios.html', {'mensaje':f"Bienvenido {usuario}","avatar":obtenerAvatar(request)})
             else:
-                return render(request,'AppUsuarios/login.html', {"avatar":obtenerAvatar(request),'form':form, 'mensaje':"Usuario y/o Contraseña incorrectos"})
+                return render(request,'AppUsuarios/login.html', {"avatar":obtenerAvatar(request),'form':form, 'mensaje':"Usuario y/o Contraseña incorrectos","avatar":obtenerAvatar(request)})
         else:
-            return render(request,'AppUsuarios/login.html', {"avatar":obtenerAvatar(request),'form':form, 'mensaje':"Usuario y/o Contraseña incorrecto."})
+            return render(request,'AppUsuarios/login.html', {"avatar":obtenerAvatar(request),'form':form, 'mensaje':"Usuario y/o Contraseña incorrecto.","avatar":obtenerAvatar(request)})
     
     form= AuthenticationForm()
 
@@ -121,7 +121,7 @@ def agregarAvatar(request):
             avatar.save()
             return render(request, "AppUsuarios/inicioUsuarios.html", {"mensaje":f"Avatar agregado correctamente", "avatar":obtenerAvatar(request)})
         else:
-            return render(request, "AppUsuarios/agregarAvatar.html", {"form": form, "usuario": request.user, "mensaje":"Error al agregar el avatar"})
+            return render(request, "AppUsuarios/agregarAvatar.html", {"form": form, "usuario": request.user, "mensaje":"Error al agregar el avatar","avatar":obtenerAvatar(request)})
     else:
         form=AvatarForm()
         return render(request, "AppUsuarios/agregarAvatar.html", {"form": form, "usuario": request.user, "avatar":obtenerAvatar(request)})
@@ -164,7 +164,7 @@ def verPerfil(request, id):
 def eliminarUsuario(request):
     request.user.delete()
 
-    return render(request, "AppUsuarios/logout.html", {'mensaje':f'{request.user.username}, su usuario ha sido eliminado'})
+    return render(request, "AppUsuarios/logout.html", {'mensaje':f'{request.user.username}, su usuario ha sido eliminado',"avatar":obtenerAvatar(request)})
 
 def buscarUsuario(request):
     if request.method == 'POST':
@@ -173,11 +173,11 @@ def buscarUsuario(request):
         if username!='':
             usuarios=User.objects.filter(username__icontains=username)
             
-            return render(request, 'AppUsuarios/buscarUsuario.html',{'usuarios':usuarios})
+            return render(request, 'AppUsuarios/buscarUsuario.html',{'usuarios':usuarios,"avatar":obtenerAvatar(request)})
         else:
-            return render(request, 'AppUsuarios/buscarUsuario.html',{'mensaje':'Ingrese un nombre a buscar'})
+            return render(request, 'AppUsuarios/buscarUsuario.html',{'mensaje':'Ingrese un nombre a buscar',"avatar":obtenerAvatar(request)})
     else:
-        return render(request, 'AppUsuarios/buscarUsuario.html')
+        return render(request, 'AppUsuarios/buscarUsuario.html',{"avatar":obtenerAvatar(request)})
 
 
 # MENSAJERIA
@@ -199,10 +199,10 @@ def responder(request, id):
             
       respuesta.save()
 
-      return render(request,"AppUsuarios/inicioUsuarios.html", {"mensaje":'Mensaje respondido con éxito'})
+      return render(request,"AppUsuarios/inicioUsuarios.html", {"mensaje":'Mensaje respondido con éxito',"avatar":obtenerAvatar(request)})
   else:
     form=RespuestaForm()
-    return render(request, "AppUsuarios/responderMensaje.html", {"form": form})
+    return render(request, "AppUsuarios/responderMensaje.html", {"form": form,"avatar":obtenerAvatar(request)})
 
 @login_required
 def nuevoMensaje(request):
@@ -231,13 +231,13 @@ def nuevoMensaje(request):
 def mensajes(request):
     mensajes=Mensaje.objects.all()
 
-    return render (request, 'AppUsuarios/mensajesRecibidos.html', {'mensajes':mensajes})
+    return render (request, 'AppUsuarios/mensajesRecibidos.html', {'mensajes':mensajes,"avatar":obtenerAvatar(request)})
 
 @login_required
 def mensajesEnviados(request):
     mensajes=Mensaje.objects.all()
 
-    return render (request, 'AppUsuarios/mensajesEnviados.html', {'mensajes':mensajes})
+    return render (request, 'AppUsuarios/mensajesEnviados.html', {'mensajes':mensajes,"avatar":obtenerAvatar(request)})
 
 
 @login_required    

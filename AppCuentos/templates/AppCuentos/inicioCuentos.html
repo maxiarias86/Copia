@@ -25,13 +25,15 @@
        
     
     {% for cuento in cuentos %}
-    
-    <p>{{ cuento.categoria }}</p>
-    <p>{{ cuento.titulo }}</p>
-    <p>{{ cuento.autor }}</p>
-    
+    <div class="small mb-1">{{ cuento.categoria }}</div>
+                        <h1 class="display-5 fw-bolder" >{{ cuento.titulo }}</h1>
+                        <div class="fs-5 mb-5">
+                            <span>{{ cuento.autor }}</span>
+                        </div>
     <a class="btn btn-light" href="{% url 'verCuento'  cuento.id  %}">Ver Cuento </a>
+    {% if cuento.autor != request.user %}
     <a class="btn btn-dark" href="{% url 'mensajeAlAutor'  cuento.id  %}">Mensaje al Autor </a>
+    {% endif %}
     {% if cuento.autor == request.user or request.user.is_staff == 1 %}
     <a class="btn btn-danger" href="{% url 'eliminarCuento'  cuento.id  %}">Eliminar cuento </a>
     {% endif %}

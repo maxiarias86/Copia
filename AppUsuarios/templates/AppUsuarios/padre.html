@@ -17,7 +17,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 {% if user.is_authenticated %}
-                <a class="navbar-brand" >Bienvenid@ {{ user.username }} a Una imagen... mil palabras</a>
+                <a class="navbar-brand" href="{% url 'inicioUsuarios' %}">Bienvenid@ {{ user.username }} a Una imagen... mil palabras</a>
                 <img src="{{ avatar }}" alt="" width="30" height="30">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -28,7 +28,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Log Out</a></li>
                     </ul>
                 {% else %}
-                <a class="navbar-brand" >Una imagen... mil palabras</a>
+                <a class="navbar-brand" href="{% url 'inicioUsuarios' %}">Una imagen... mil palabras</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

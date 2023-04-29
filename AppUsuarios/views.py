@@ -220,9 +220,12 @@ def nuevoMensaje(request):
             mensaje.contenido=info["contenido"]
             mensaje.fecha=datetime.date.today()
             
-            mensaje.save()
+            if mensaje.destinatario == mensaje.remitente:
+                return render(request, "AppUsuarios/inicioUsuarios.html", {"mensaje":'El sistema de mensajería no permite escribirse a uno mismo',"avatar":obtenerAvatar(request)})
+            else:
+                mensaje.save()
 
-            return render(request,"AppUsuarios/inicioUsuarios.html", {"mensaje":'Mensaje enviado con éxito',"avatar":obtenerAvatar(request)})
+                return render(request,"AppUsuarios/inicioUsuarios.html", {"mensaje":'Mensaje enviado con éxito',"avatar":obtenerAvatar(request)})
     else:
         form=MensajeForm()
         return render(request, "AppUsuarios/nuevoMensaje.html", {"form": form,"avatar":obtenerAvatar(request)})

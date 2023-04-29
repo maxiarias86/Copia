@@ -32,7 +32,7 @@
     
     <a class="btn btn-light" href="{% url 'verCuento'  cuento.id  %}">Ver Cuento </a>
     <a class="btn btn-dark" href="{% url 'mensajeAlAutor'  cuento.id  %}">Mensaje al Autor </a>
-    {% if cuento.autor == request.user %}
+    {% if cuento.autor == request.user or request.user.is_staff == 1 %}
     <a class="btn btn-danger" href="{% url 'eliminarCuento'  cuento.id  %}">Eliminar cuento </a>
     {% endif %}
 

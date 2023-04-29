@@ -119,10 +119,3 @@ def buscarPorCategoria(request):
     else:
         form=buscarPorCategoriaForm()
         return render (request, 'AppCuentos/buscarPorCategoria.html', {'form':form,"avatar":obtenerAvatar(request)})
-    
-def milpalabras(texto):
-  palabras=texto.split()
-  if len(palabras)>1000:
-    return False
-  else:
-    True

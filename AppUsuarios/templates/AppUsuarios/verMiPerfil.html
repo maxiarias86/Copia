@@ -12,24 +12,24 @@
 
 {% block cuerpo %}
 
-<body>
-    <p> </p>
-        <div class="card mb-4">
-            <a href="#!"><img class="card-img-top" src="{{ avatar }}" alt="avatar"/></a>
-            <div class="card-body">
-                {% if user.is_authenticated %}
-                <p class="card-text">{{ email }}</p>
-                {% endif %}
-                <p class="card-text">{{ descripcion }}</p>
-                <p class="card-text">{{ pagina }}</p>
-                <a class="btn btn-primary" href="{% url 'editarUser' %}">Editar tu contraseña y/o email</a>
-                <a class="btn btn-primary" href="{% url 'editarPerfil' %}">Editar tu descripcion y/o WebPage</a>
-                <a class="btn btn-primary" href="{% url 'agregarAvatar' %}">Editar tu avatar</a>
-                <a class="btn btn-danger" href="{% url 'confEliminar' %}">ELIMINAR USUARIO</a>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ avatar }}" alt="avatar" /></div>
+            <div class="col-md-6">
+                <div class="card-body">
+                    {% if user.is_authenticated %}
+                    <p class="lead">Mail: {{ email }}</p>
+                    {% endif %}
+                    <p class="lead">Descripción: {{ descripcion }}</p>
+                    <p class="lead">WebPage: {{ pagina }}</p>
+                    <a class="btn btn-light" href="{% url 'editarUser' %}">Editar contraseña y/o email</a>
+                    <a class="btn btn-light" href="{% url 'editarPerfil' %}">Editar descripcion y/o WebPage</a>
+                    <a class="btn btn-light" href="{% url 'agregarAvatar' %}">Editar avatar</a>
+                    <a class="btn btn-danger" href="{% url 'confEliminar' %}">ELIMINAR USUARIO</a>
+                </div>
             </div>
         </div>
-                
-    </form>
-    
-</body>
+    </div>
+</section>
 {% endblock %}

@@ -4,24 +4,28 @@
 
 {% block titulo %}
 
-{{ titulo }}
+<h1 class="fw-bolder">{{ titulo }}</h1>
 
 {% endblock %} 
 
 {% block cuerpo %}
 
-<!-- Featured blog post-->
 <div class="card mb-4">
     <a href="#!"><img class="card-img-top" src="{{ foto }}" alt="foto" /></a>
     <div class="card-body">
         <div class="small text-muted">{{ fecha }}</div>
         <p class="card-text">{{ categoria }}</p>
-        <h2 class="card-title">{{ titulo }}</h2>
-        <p class="card-text">{{ subtitulo }}</p>
+        <h1 class="display-5 fw-bolder">{{ titulo }}</h1>
+        <div class="fs-5 mb-5">
+            <span>{{ subtitulo }}</span>
+        </div>
         <p class="card-text">{{ cuerpo }}</p>
-        <p class="card-text">{{ autor }}</p>
+        <div class="fs-5 mb-5">
+            <span>{{ autor }}</span>
+        </div>
         <a class="btn btn-dark" href="{% url 'mensajeAlAutor' id  %}">Mensaje al Autor </a>
     </div>
 </div>
+
 
 {% endblock %}

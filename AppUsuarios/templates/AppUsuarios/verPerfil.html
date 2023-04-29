@@ -3,28 +3,30 @@
 {% load static %}
 
 {% block titulo %}
-                   
+
+<a class="btn btn-secondary" href="{% url 'buscarUsuario' %}">Buscar otro usuario</a>
 <h1 class="fw-bolder">{{ username }}</h1>
-<a class="btn btn-secondary" href="{% url 'buscarUsuario' %}">Buscar otro de perfiles</a>
+
                     
 {% endblock %}
 
 {% block cuerpo %}
 
-<body>
-    
-    <form>
-        <div class="card mb-4">
-            <a href="#!"><img class="card-img-top" src="{{ avatar }}" alt="avatar"/></a>
-            <div class="card-body">
-                {% if user.is_authenticated %}
-                <p class="card-text">{{ email }}</p>
-                {% endif %}
-                <p class="card-text">{{ descripcion }}</p>
-                <p class="card-text">{{ pagina }}</p>
-                <a class="btn btn-dark" href="{% url 'mensajeAlUsuario' id  %}">Mensaje al Usuario </a>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ avatar }}" alt="avatar" /></div>
+            <div class="col-md-6">
+                <div class="card-body">
+                    {% if user.is_authenticated %}
+                    <p class="lead">Mail: {{ email }}</p>
+                    {% endif %}
+                    <p class="lead">Descripción: {{ descripcion }}</p>
+                    <p class="lead">WebPage: {{ pagina }}</p>
+                    <a class="btn btn-dark" href="{% url 'mensajeAlUsuario' id  %}">Mensaje al Usuario </a>
+                </div>
             </div>
-        </div>                
-    </form>    
-</body>
+        </div>
+    </div>
+</section>
 {% endblock %}

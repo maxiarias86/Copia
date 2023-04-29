@@ -38,10 +38,16 @@ def nuevoCuento(request):
             cuento.subtitulo=info['subtitulo']
             cuento.cuerpo=info['cuerpo']
             cuento.foto=request.FILES["foto"]
-            
-            cuento.save()
 
-            return redirect('inicioCuentos')
+            palabras=cuento.cuerpo.split()
+            if len(palabras)>1000:
+                mensaje="Lamentablemente el cuento tiene más de mil palabras, no ha sido cargado"
+            else:
+                cuento.save()
+                mensaje="Felicitaciones es el autor de un cuento nuevo"
+
+
+            return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":mensaje,"avatar":obtenerAvatar(request)})
         else:
             return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":'Error al agregar el cuento',"avatar":obtenerAvatar(request)})
          
@@ -82,7 +88,7 @@ def mensajeAlAutor(request, id):
             mensaje.fecha=datetime.date.today()
             
             mensaje.save()
-
+            
             return render(request,"AppUsuarios/inicioUsuarios.html", {"mensaje":'Mensaje enviado con éxito',"avatar":obtenerAvatar(request)})
     else:
         form=MensajeAlAutorForm()
@@ -113,3 +119,10 @@ def buscarPorCategoria(request):
     else:
         form=buscarPorCategoriaForm()
         return render (request, 'AppCuentos/buscarPorCategoria.html', {'form':form,"avatar":obtenerAvatar(request)})
+    
+def milpalabras(texto):
+  palabras=texto.split()
+  if len(palabras)>1000:
+    return False
+  else:
+    True

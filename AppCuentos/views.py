@@ -73,7 +73,7 @@ def buscarCuento(request):
             mensaje=''
         return render(request, 'AppCuentos/inicioCuentos.html',{'mensaje':mensaje,'cuentos':cuentos,"avatar":obtenerAvatar(request)})
     else:
-        return render(request, 'AppCuentos/buscarCuento.html',{'mensaje':'Ingrese una palabra clave a buscar',"avatar":obtenerAvatar(request)})
+        return render(request, 'AppCuentos/inicioCuentos.html',{'mensaje':'Ingrese una palabra clave a buscar',"avatar":obtenerAvatar(request)})
 
 @login_required
 def mensajeAlAutor(request, id):

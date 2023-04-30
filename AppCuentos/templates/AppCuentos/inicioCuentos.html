@@ -5,9 +5,13 @@
 {% block titulo %}
                    
 <h1 class="fw-bolder">Cuentos</h1>
+{% if user.is_authenticated %}
 <a class="btn btn-secondary" href="{% url 'nuevoCuento' %}">Crear nuevo cuento</a>
-<a class="btn btn-secondary" href="{% url 'buscarPorCategoria' %}">Filtrar por Categoría</a> 
-<a class="btn btn-secondary" href="{% url 'misCuentos' %}">Mis cuentos</a> 
+{% endif %}
+<a class="btn btn-secondary" href="{% url 'buscarPorCategoria' %}">Filtrar por Categoría</a>
+{% if user.is_authenticated %} 
+<a class="btn btn-secondary" href="{% url 'misCuentos' %}">Mis cuentos</a>
+{% endif %} 
 <form action="{% url 'buscarCuento' %}" method="GET"> 
 
     <input type="text" name="titulo" id="titulo" placeholder="Título">
@@ -31,11 +35,13 @@
                             <span>{{ cuento.autor }}</span>
                         </div>
     <a class="btn btn-light" href="{% url 'verCuento'  cuento.id  %}">Ver Cuento </a>
+    {% if user.is_authenticated %}
     {% if cuento.autor != request.user %}
     <a class="btn btn-dark" href="{% url 'mensajeAlAutor'  cuento.id  %}">Mensaje al Autor </a>
     {% endif %}
     {% if cuento.autor == request.user or request.user.is_staff == 1 %}
     <a class="btn btn-danger" href="{% url 'eliminarCuento'  cuento.id  %}">Eliminar cuento </a>
+    {% endif %}
     {% endif %}
 
     {% endfor %}

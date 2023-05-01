@@ -6,7 +6,7 @@
                    
 <h1 class="fw-bolder">Cuentos</h1>
 {% if user.is_authenticated %}
-<a class="btn btn-secondary" href="{% url 'nuevoCuento' %}">Crear nuevo cuento</a>
+<a class="btn btn-secondary" href="{% url 'nuevoCuento' %}">Crear un nuevo cuento</a>
 {% endif %}
 <a class="btn btn-secondary" href="{% url 'buscarPorCategoria' %}">Filtrar por Categoría</a>
 {% if user.is_authenticated %} 

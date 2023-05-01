@@ -23,7 +23,8 @@
         <div class="fs-5 mb-5">
             <span>{{ autor }}</span>
         </div>
-        {% if user.is_authenticated %}
+        {% if user.is_authenticated and autor != request.user %}
+        
         <a class="btn btn-dark" href="{% url 'mensajeAlAutor' id  %}">Mensaje al Autor </a>
         {% endif %}
     </div>

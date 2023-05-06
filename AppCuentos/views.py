@@ -127,3 +127,41 @@ def buscarPorCategoria(request):
     else:
         form=buscarPorCategoriaForm()
         return render (request, 'AppCuentos/buscarPorCategoria.html', {'form':form,"avatar":obtenerAvatar(request)})
+
+def editarCuento(request, id):
+    cuentoViejo=Cuento.objects.get(id=id)
+    print(cuentoViejo)
+    
+    if request.method == 'POST':
+        form=EditarCuentoForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            
+            info=form.cleaned_data
+            
+            cuentoEditado=Cuento()
+            cuentoEditado.fecha=datetime.date.today()
+            cuentoEditado.categoria=info['categoria']
+            cuentoEditado.autor=cuentoViejo.autor
+            cuentoEditado.titulo=cuentoViejo.titulo
+            cuentoEditado.subtitulo=info['subtitulo']
+            cuentoEditado.cuerpo=info['cuerpo']
+            cuentoEditado.foto=request.FILES["foto"]
+
+            palabras=cuentoEditado.cuerpo.split()
+            if len(palabras)>1000:
+                mensaje="Lamentablemente el cuento tiene más de mil palabras, no ha sido editado"
+            else:
+                cuentoViejo.delete()
+                
+                cuentoEditado.save()
+                mensaje="El cuento ha sido modificado"
+
+
+            return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":mensaje,"avatar":obtenerAvatar(request)})
+        else:
+            return render(request,"AppCuentos/inicioCuentos.html", {"mensaje":'Error al editar el cuento',"avatar":obtenerAvatar(request)})
+         
+    else:
+        form=EditarCuentoForm()
+        return render(request, "AppCuentos/editarCuento.html", {"mensaje":f'Editando {cuentoViejo.titulo}',"form": form,"avatar":obtenerAvatar(request)})

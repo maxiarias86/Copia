@@ -1,0 +1,29 @@
+{% extends "AppUsuarios/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+                   
+<h1 class="fw-bolder">Editar Cuento</h1>
+<p>{{ mensaje }}</p>
+                    
+{% endblock %}
+
+{% block cuerpo %}
+
+<body>
+    <form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+        <table>
+        
+            {{ form.as_table }}
+        
+        </table>
+        
+        <input type="submit" value="Edital Cuento">
+        
+        
+    </form>
+    
+</body>
+{% endblock %}

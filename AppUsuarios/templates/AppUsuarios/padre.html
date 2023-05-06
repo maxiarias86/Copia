@@ -25,7 +25,7 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'inicioCuentos' %}">Cuentos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'mensajes' %}">Mensajes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'verMiPerfil' %}">Perfiles</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Log Out</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a></li>
                     </ul>
                 {% else %}
                 <a class="navbar-brand" href="{% url 'inicioUsuarios' %}">Una imagen... mil palabras</a>
@@ -34,8 +34,8 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" >Logeate para habilitar todas las funcionalidades!</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'inicioCuentos' %}">Cuentos</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'login' %}">Log In</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'register' %}">Sign In</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'register' %}">Registro</a></li>
                     </ul>
                 {% endif %}
                 </div>

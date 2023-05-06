@@ -42,6 +42,9 @@
     {% if cuento.autor == request.user or request.user.is_staff == 1 %}
     <a class="btn btn-danger" href="{% url 'eliminarCuento'  cuento.id  %}">Eliminar cuento </a>
     {% endif %}
+    {% if user.is_staff %}
+    <a class="btn btn-secondary" href="{% url 'editarCuento'  cuento.id  %}">Editar cuento </a>
+    {% endif %}
     {% endif %}
 
     {% endfor %}

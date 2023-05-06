@@ -13,3 +13,9 @@ class CuentoForm(forms.Form):
 
 class buscarPorCategoriaForm(forms.Form):
     categoria=forms.ChoiceField(choices=categorias,label='Seleccione una categoria')
+
+class EditarCuentoForm(forms.Form):
+    categoria=forms.ChoiceField(choices=categorias,label='Seleccione una categoria')
+    subtitulo=forms.CharField(label='Subtítulo')
+    cuerpo=forms.CharField(label='Cuerpo',widget=forms.Textarea(),help_text='Recuerde que el cuento no puede contener más de mil palabras')
+    foto=forms.ImageField(label='Foto')
